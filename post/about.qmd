@@ -1,0 +1,106 @@
+---
+title: "Daniel Quiroz"
+---
+
+## About me
+
+<p align="center">
+<img src="/img/daniel_lab.jpg" alt="This is me" width="35%"/>
+</p>
+
+Greetings! I'm a dedicated PhD candidate at the
+[Cooperstone Lab](https://www.cooperstonelab.com)
+within The Ohio State University, where my passion lies in the fascinating 
+intersection of metabolomics and genomics. My doctoral journey revolves around
+unraveling the genomic regions orchestrating the expression of phytochemicals—a
+mission that fuels my curiosity and intellectual drive.
+
+## Software development
+
+My expertise extends beyond the lab bench. I'm an enthusiastic mass spectrometry
+aficionado and a skilled software developer, and I've recently undertaken 
+some exciting projects:
+
+-   [MS2extract](https://cooperstonelab.github.io/MS2extract/): I've crafted
+    an R package designed to construct in-house MS/MS libraries, 
+    facilitating advanced mass spectrometry analyses.
+-   [PhenolicsDB](https://cooperstonelab.github.io/PhenolicsDB/):
+    I've created a specialized MS/MS database, dedicated to the
+    intricate world of phenolic compounds.
+-   [RGCxGC](https://danielquiroz97.github.io/RGCxGC/): My R package streamlines
+    the end-to-end processing of GCxGC-MS data, simplifying complex data analysis.
+
+
+## Data analysis
+
+To delve into my work further, take a look at my repositories, where you'll
+find examples of mass spectrometry data analysis, as well as my ventures into
+microbiome analysis:
+
+### Mass Spectrometry
+
+-   [Apple phytochemicals](https://github.com/CooperstoneLab/apple_phytochemicals):
+    Targeted peak integration of MS data of phytochemicals present in
+    apples.
+-   [Uruspatha sagittifolia metabolomics](https://github.com/IKIAM-NPL/U_sagittifolia_tubers): 
+    Exploring the metabolome of a plant with the power of stoping snake venom.
+
+    
+### Microbiome
+
+-   [Ornamental Floral microbiome](https://github.com/DanielQuiroz97/Floral_Microbiome):
+    Metagenomics analysis of the rhizosphere of ornamental cultivars.
+-   [Microbiome present in Cayambe glaciar](https://gitlab.com/ec.microbiome.proj/cayambe-microbiome-year-1):
+    Here, we explored the microbiome present in a tropical glacier.
+-   [Microbiome present in Sumaco stratovolcano](https://gitlab.com/ec.microbiome.proj/sumaco-microbiome-year-1):
+    Here, we explored the microbiome present in a tropical sleeping volcano.
+
+
+## Teaching and mentoring
+
+Beyond my research, I'm deeply committed to the realms of teaching and
+mentoring. I'm currently serving as a teaching assistant for the 
+[DataViz in R](http://datavisualizing.netlify.app/), and I find great
+fulfillment in guiding for the second time. Additionally,
+I'm a mentor within the [Metabolomics Group](https://github.com/IKIAM-NPL) 
+at Ikiam University, where I'm devoted to nurturing the next generation of
+scientists.
+
+In essence, my journey is a fusion of scientific exploration, software 
+innovation, and the joy of passing on knowledge. If you share my passion 
+for metabolomics, genomics, or data science, let's connect and embark on a 
+journey of discovery together!
+
+
+## Recent Publications
+
+-  2024 - Jefferson V Pastuña-Fasso, *Cristian Quiroz-Moreno*, et al. **Metabolite fingerprinting of Urospatha sagittifolia (Araceae) tubers at different growth stages by multi-platform metabolomics and molecular networking**. Microchemical journal [(link)](https://www.sciencedirect.com/science/article/pii/S0026265X2400170X).
+
+- 2024 - C. Alfonso Molina,  *Cristian Quiroz-Moreno*, et al.,**Bacterial community assessment of drinking water and downstream distribution systems in highland localities of Ecuador **. Journal of Water and Health [(link)](https://iwaponline.com/jwh/article/doi/10.2166/wh.2024.290/100361/Bacterial-community-assessment-of-drinking-water).
+
+-   2023 - Magdalena Dias, Pablo Monfort-Lanzas, *Cristian
+    Quiroz-Moreno*, et al., **The microbiome of the ice-capped Cayambe
+    Volcanic Complex in Ecuador**. Frotiers in Microbioloy
+    [(link)](https://www.frontiersin.org/articles/10.3389/fmicb.2023.1154815/full?s=09).
+
+-   2022 - Magdalena Dias, *Cristian Quiroz-Moreno*, et al., **Soil
+    bacterial community along an altitudinal gradient in the Sumaco, a
+    stratovolcano in the Amazon region**. Frontiers in Forest and Global
+    Change
+    [(link)](https://www.frontiersin.org/articles/10.3389/ffgc.2022.738568/full).
+
+-   2022- Mallory L. Goggans, Emma A. Bilgrey, *Cristian Quiroz-Moreno*,
+    et. al., **Short-Term Tomato Consumption Alters the Pig Gut
+    Microbiome toward a More Favorable Profile**. Mirobiology Spectrum
+    [(link)](https://journals.asm.org/doi/abs/10.1128/spectrum.02506-22).
+
+-   2020 - *Cristian Quiroz-Moreno*, et. al., **RGCxGC toolbox: an
+    R-package for data processing in comprehensive two-dimensional gas
+    chromatography-mass spectrometry**. Microchemical Journal
+    [(link)](https://www.sciencedirect.com/science/article/pii/S0026265X20304914).
+
+-   2018 - Noroska Salazar, *Cristian Quiroz-Moreno*, et. al.,\
+    **New advances in toxicological forensic analysis using mass
+    spectrometry techniques**. Journal of Analytical Methods in
+    Chemistry
+    [(link)](https://www.hindawi.com/journals/jamc/2018/4142527/abs/).

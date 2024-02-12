@@ -1,0 +1,41 @@
+---
+title: "Omics-based Data Analysis"
+---
+
+## Personal Blog
+
+I'll be brief, this is a personal website to share documentation and
+useful resources about mass spec, metabolomics, and microbiome metagenomics data analysis.
+More information about myself, please visit the [About](post/about.html) page.
+
+
+::: {.column-margin}
+<a href="https://cooperstonelab.github.io/MS2extract/" rel="MS2extract">![](img/MS2extract_logo)</a>
+<a href="https://cooperstonelab.github.io/PhenolicsDB/" rel="PhenolicsDB">![](img/PhenolicDB_logo)</a>
+:::
+
+## Latest blogs
+
+* M2extract Part 1 - Introduction to MS2extract package [(Link)](/post/20230811_MS2extract4library/)
+
+* MS2extract Part 2 - Using the MS2extract batch pipeline [(Link)](post/20230928_MSextract_batch/)
+
+*  MS2extract Part 3 - Behind the curtains of importing MS/MS data
+ [(Link)](http://localhost:5234/post/20230928_MS2extract_import/)
+ * MS2extract Part 4 - Using MSconvert to filter useful MS/MS data [(Link)](post/20230928_MS2extract_tips/)
+ 
+ 
+## Latest publications
+ 
+ 
+The most recent publications are:
+ 
+ -  2024 - Jefferson V Pastuña-Fasso, *Cristian Quiroz-Moreno*, et al. **Metabolite fingerprinting of Urospatha sagittifolia (Araceae) tubers at different growth stages by multi-platform metabolomics and molecular networking**. Microchemical journal [(link)](https://www.sciencedirect.com/science/article/pii/S0026265X2400170X).
+
+- 2024 - C. Alfonso Molina,  *Cristian Quiroz-Moreno*, et al.,**Bacterial community assessment of drinking water and downstream distribution systems in highland localities of Ecuador **. Journal of Water and Health [(link)](https://iwaponline.com/jwh/article/doi/10.2166/wh.2024.290/100361/Bacterial-community-assessment-of-drinking-water).
+
+If you are intersted to see the full list of publications, please visit the
+[Abaut](post/about.html) page.
+ 
+ 
+ 

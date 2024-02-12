@@ -1,0 +1,39 @@
+project:
+  type: website
+
+website:
+  title: "Daniel Quiroz"
+  site-url: https://arrow-user2022.netlify.app
+  repo-url: https://github.com/djnavarro/arrow-user2022
+  open-graph: true
+  twitter-card:
+    creator: "@danielquirozd"
+    card-style: summary_large_image
+    image: "img/favicon.png"
+  navbar:
+    background: primary
+    left:
+      - href: index.qmd
+        text: Home
+      - text: Metabolomics posts
+        menu:
+          - href: post/20230811_MS2extract4library/index.html
+            text: "1 - MS2extract introduction"
+          - href: post/20230928_MSextract_batch/index.html
+            text: "2 - MS2extract batch processing"
+          - href: post/20230928_MS2extract_import/index.html
+            text: "3 - MS2extract importing data"
+          - href: post/20230928_MS2extract_tips/index.html
+            text: "4 - MS2extract extra tips"
+      - href: post/about.html
+        text: About
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
+
+
+
+
