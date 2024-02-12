@@ -2,32 +2,59 @@ project:
   type: website
 
 website:
+# Title and description
   title: "Daniel Quiroz"
-  site-url: https://arrow-user2022.netlify.app
-  repo-url: https://github.com/djnavarro/arrow-user2022
+  site-url: https://danielquiroz97.github.io
+  repo-url: https://github.com/DanielQuiroz97/DanielQuirozWeb
   open-graph: true
   twitter-card:
     creator: "@danielquirozd"
     card-style: summary_large_image
     image: "img/favicon.png"
+
+  # Navigation bar
   navbar:
     background: primary
     left:
       - href: index.qmd
         text: Home
-      - text: Metabolomics posts
-        menu:
-          - href: post/20230811_MS2extract4library/index.html
-            text: "1 - MS2extract introduction"
-          - href: post/20230928_MSextract_batch/index.html
-            text: "2 - MS2extract batch processing"
-          - href: post/20230928_MS2extract_import/index.html
-            text: "3 - MS2extract importing data"
-          - href: post/20230928_MS2extract_tips/index.html
-            text: "4 - MS2extract extra tips"
+      - sidebar:MassSpec
       - href: post/about.html
         text: About
+    tools: 
+      - icon: github
+        href: https://github.com/DanielQuiroz97/DanielQuirozWeb
+      - icon: twitter
+        href: https://twitter.com/danielquirozd
+      - icon: linkedin
+        href: https://www.linkedin.com/in/danielquirozmoreno/
+  sidebar:
+    - id: MassSpec
+      title: Mass Spectrometry
+      collapse-level: 2
+      contents:
+        - section: MS/MS libraries
+          contents:
+            - href: post/20230811_MS2extract4library/index.html
+              text: "1 - MS2extract introduction"
+            - href: post/20230928_MSextract_batch/index.html
+              text: "2 - MS2extract batch processing"
+            - href: post/20230928_MS2extract_import/index.html
+              text: "3 - MS2extract importing data"
+            - href: post/20230928_MS2extract_tips/index.html
+              text: "4 - MS2extract extra tips"
+        - section: Analysis and visualization
+          contents:
+            - href: post/20231016_MirrorPlot/index.html
+              text: "Creating MS/MS mirror plots"
+            - href: post/20230925_msmint_apple/index.html
+              text: "HRMS targeted peak deconvolution"
 
+#
+execute:
+  freeze: auto
+
+# Format
 format:
   html:
     theme: cosmo

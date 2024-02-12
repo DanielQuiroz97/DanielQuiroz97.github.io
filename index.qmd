@@ -2,7 +2,7 @@
 title: "Omics-based Data Analysis"
 ---
 
-## Personal Blog
+## Daniel Quiroz personal blog
 
 I'll be brief, this is a personal website to share documentation and
 useful resources about mass spec, metabolomics, and microbiome metagenomics data analysis.

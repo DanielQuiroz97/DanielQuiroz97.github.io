@@ -1,0 +1,15 @@
+{
+  "hash": "291ac9e4831b82efc9139301385386cd",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: MS2extract Part 3 - Behind the curtains of importing MS/MS data\nauthor: Daniel Quiroz & Jessica Cooperstone\ndate: '2023-09-27'\n---\n\n\n\n\n## Goal of this vignette\n\nThe main objective of this document is to explain in a detailed manner\nhow we import and process MS/MS when you use `import_mzxml()`.\n\nThis document is organized based on the main steps we take to import\nMS/MS data that are:\n\n-   Calculating the theoretical precursor ion,\n-   Filtering MS/MS scans for a given precursor ion and rt range, and\n-   Finding the most intense MS/MS scan.\n\n## Calculating the theoretical precursor ion\n\nOne of the main inputs, besides the .mzML data, is the `met_metadata`\ndata frame used in `import_mzxml()`. This data frame contains the\nminimum information to calculate the theoretical precursor ion *m/z*\ngiven the following information:\n\n-   Chemical formula,\n-   Ionization polarity, and\n-   ppm (mass error)\n\nThis process can be depicted in the following image.\n\n![](Import_1.png)\n\nHere, we are going to use procyanidin A2 to demonstrate this process.\n(1) First, by using the `Rdisop` package, we calculate the\ntheoretical monoisotopic mass. (2) Then, given an specific polarity\n(*Positive* or *Negative*), we add or subtract the mass of a proton to\ncalculate the theoretical ion *m/z*. (3) Finally, we used the provided\nppm value (10 ppm by default) to calculate the *m/z* range that will be\nused to filter scan that the precursor ion value falls within this\nrange.\n\nYou can also calculate this ppm range with `ppm_range()`\n\n\n::: {.cell}\n\n```{.r .cell-code}\nppm_range(mz = 575.12604, ppm = 10)\n#> [1] 575.1203 575.1318\n```\n:::\n\n\n## Filtering MS/MS scans\n\n### Using retention time region of interest\n\nAlthough providing a retention time window is not mandatory, it is\nhighly suggested to provide this information to have more control over\nthe regions of the run that we look for the MS/MS scans. If you do not\nprovide a specific rt ROI, this package will look for the most intense\nscan, even if that do not represent the desired scans from the provided\nmetabolite.\n\n![](Import_2.png)\n\n### Filtering using *m/z* range and rt ROI\n\nThen, after calculating the theoretical *m/z* range, and knowing the rt\nROI, we can look in the data for the MS/MS scans that have this\ninformation.\n\nIf `MS2extract` do not find at least one MS/MS scan within the given\n*m/z* range and rt ROI, it will stop.\n\nIn the following example, the scan in the first row does not meet these\nrequirements, and it is discarded, while the second and third scan falls\nwithin these requirements, and are kept for the next steps.\n\n![](Import_3.png)\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

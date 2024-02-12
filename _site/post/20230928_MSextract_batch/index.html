@@ -110,12 +110,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta property="og:site_name" content="Daniel Quiroz">
 <meta name="twitter:title" content="Daniel Quiroz - MS2extract Part 2 - Using the MS2extract batch pipeline">
 <meta name="twitter:description" content="">
-<meta name="twitter:image" content="https://arrow-user2022.netlify.app/post/20230928_MSextract_batch/img/favicon.png">
+<meta name="twitter:image" content="https://danielquiroz97.github.io/post/20230928_MSextract_batch/img/favicon.png">
 <meta name="twitter:creator" content="@danielquirozd">
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
-<body class="nav-fixed">
+<body class="nav-sidebar floating nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -137,10 +137,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-msms-libraries" role="button" data-bs-toggle="dropdown" aria-expanded="false">
- <span class="menu-text">MS/MS libraries</span>
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-mass-spectrometry" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Mass Spectrometry</span>
     </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-msms-libraries">    
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-mass-spectrometry">    
+        <li class="dropdown-header">MS/MS libraries</li>
         <li>
     <a class="dropdown-item" href="../../post/20230811_MS2extract4library/index.html">
  <span class="dropdown-text">1 - MS2extract introduction</span></a>
@@ -157,6 +158,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a class="dropdown-item" href="../../post/20230928_MS2extract_tips/index.html">
  <span class="dropdown-text">4 - MS2extract extra tips</span></a>
   </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">Analysis and visualization</li>
+        <li>
+    <a class="dropdown-item" href="../../post/20231016_MirrorPlot/index.html">
+ <span class="dropdown-text">Creating MS/MS mirror plots</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../post/20230925_msmint_apple/index.html">
+ <span class="dropdown-text">HRMS targeted peak deconvolution</span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item">
@@ -165,14 +176,92 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
-          <div class="quarto-navbar-tools">
+          <div class="quarto-navbar-tools tools-wide">
+    <a href="https://github.com/DanielQuiroz97/DanielQuirozWeb" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-github"></i></a>
+    <a href="https://twitter.com/danielquirozd" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-twitter"></i></a>
+    <a href="https://www.linkedin.com/in/danielquirozmoreno/" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-linkedin"></i></a>
 </div>
       </div> <!-- /container-fluid -->
     </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../post/20230811_MS2extract4library/index.html">MS/MS libraries</a></li><li class="breadcrumb-item"><a href="../../post/20230928_MSextract_batch/index.html">2 - MS2extract batch processing</a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
 </header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">MS/MS libraries</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../post/20230811_MS2extract4library/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">1 - MS2extract introduction</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../post/20230928_MSextract_batch/index.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">2 - MS2extract batch processing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../post/20230928_MS2extract_import/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">3 - MS2extract importing data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../post/20230928_MS2extract_tips/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">4 - MS2extract extra tips</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Analysis and visualization</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../post/20231016_MirrorPlot/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Creating MS/MS mirror plots</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../post/20230925_msmint_apple/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">HRMS targeted peak deconvolution</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
@@ -192,7 +281,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../post/20230811_MS2extract4library/index.html">MS/MS libraries</a></li><li class="breadcrumb-item"><a href="../../post/20230928_MSextract_batch/index.html">2 - MS2extract batch processing</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">MS2extract Part 2 - Using the MS2extract batch pipeline</h1>
 </div>
@@ -475,24 +564,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [31] colorspace_2.1-0      ggplot2_3.4.4         scales_1.3.0         </span></span>
 <span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [34] iterators_1.0.14      MASS_7.3-60           cli_3.6.2            </span></span>
 <span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [37] mzR_2.34.1            rmarkdown_2.25        generics_0.1.3       </span></span>
-<span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [40] Rdisop_1.60.0         rstudioapi_0.15.0     tzdb_0.4.0           </span></span>
-<span id="cb11-37"><a href="#cb11-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [43] readxl_1.4.3          ncdf4_1.21            affy_1.78.2          </span></span>
-<span id="cb11-38"><a href="#cb11-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [46] zlibbioc_1.46.0       parallel_4.3.1        impute_1.74.1        </span></span>
-<span id="cb11-39"><a href="#cb11-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [49] cellranger_1.1.0      BiocManager_1.30.22   vsn_3.68.0           </span></span>
-<span id="cb11-40"><a href="#cb11-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [52] vctrs_0.6.5           jsonlite_1.8.8        carData_3.0-5        </span></span>
-<span id="cb11-41"><a href="#cb11-41" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [55] car_3.1-2             hms_1.1.3             IRanges_2.34.1       </span></span>
-<span id="cb11-42"><a href="#cb11-42" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [58] S4Vectors_0.38.2      ggrepel_0.9.4         MALDIquant_1.22.1    </span></span>
-<span id="cb11-43"><a href="#cb11-43" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [61] rstatix_0.7.2         clue_0.3-65           foreach_1.5.2        </span></span>
-<span id="cb11-44"><a href="#cb11-44" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [64] limma_3.56.2          tidyr_1.3.0           affyio_1.70.0        </span></span>
-<span id="cb11-45"><a href="#cb11-45" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [67] glue_1.7.0            MSnbase_2.26.0        codetools_0.2-19     </span></span>
-<span id="cb11-46"><a href="#cb11-46" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [70] cowplot_1.1.1         gtable_0.3.4          OrgMassSpecR_0.5-3   </span></span>
-<span id="cb11-47"><a href="#cb11-47" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [73] mzID_1.38.0           munsell_0.5.0         tibble_3.2.1         </span></span>
-<span id="cb11-48"><a href="#cb11-48" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [76] pillar_1.9.0          pcaMethods_1.92.0     htmltools_0.5.7      </span></span>
-<span id="cb11-49"><a href="#cb11-49" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [79] R6_2.5.1              Rdpack_2.6            doParallel_1.0.17    </span></span>
-<span id="cb11-50"><a href="#cb11-50" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [82] evaluate_0.23         lattice_0.21-8        Biobase_2.62.0       </span></span>
-<span id="cb11-51"><a href="#cb11-51" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [85] readr_2.1.4           rbibutils_2.2.16      backports_1.4.1      </span></span>
-<span id="cb11-52"><a href="#cb11-52" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [88] broom_1.0.5           Rcpp_1.0.12           xfun_0.41            </span></span>
-<span id="cb11-53"><a href="#cb11-53" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [91] MsCoreUtils_1.12.0    pkgconfig_2.0.3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [40] Rdisop_1.60.0         tzdb_0.4.0            readxl_1.4.3         </span></span>
+<span id="cb11-37"><a href="#cb11-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [43] ncdf4_1.21            affy_1.78.2           zlibbioc_1.46.0      </span></span>
+<span id="cb11-38"><a href="#cb11-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [46] parallel_4.3.1        impute_1.74.1         cellranger_1.1.0     </span></span>
+<span id="cb11-39"><a href="#cb11-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [49] BiocManager_1.30.22   vsn_3.68.0            vctrs_0.6.5          </span></span>
+<span id="cb11-40"><a href="#cb11-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [52] jsonlite_1.8.8        carData_3.0-5         car_3.1-2            </span></span>
+<span id="cb11-41"><a href="#cb11-41" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [55] hms_1.1.3             IRanges_2.34.1        S4Vectors_0.38.2     </span></span>
+<span id="cb11-42"><a href="#cb11-42" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [58] MALDIquant_1.22.1     rstatix_0.7.2         ggrepel_0.9.4        </span></span>
+<span id="cb11-43"><a href="#cb11-43" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [61] clue_0.3-65           foreach_1.5.2         limma_3.56.2         </span></span>
+<span id="cb11-44"><a href="#cb11-44" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [64] tidyr_1.3.0           affyio_1.70.0         glue_1.7.0           </span></span>
+<span id="cb11-45"><a href="#cb11-45" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [67] MSnbase_2.26.0        codetools_0.2-19      cowplot_1.1.1        </span></span>
+<span id="cb11-46"><a href="#cb11-46" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [70] gtable_0.3.4          OrgMassSpecR_0.5-3    mzID_1.38.0          </span></span>
+<span id="cb11-47"><a href="#cb11-47" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [73] munsell_0.5.0         tibble_3.2.1          pillar_1.9.0         </span></span>
+<span id="cb11-48"><a href="#cb11-48" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [76] pcaMethods_1.92.0     htmltools_0.5.7       R6_2.5.1             </span></span>
+<span id="cb11-49"><a href="#cb11-49" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [79] Rdpack_2.6            doParallel_1.0.17     evaluate_0.23        </span></span>
+<span id="cb11-50"><a href="#cb11-50" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [82] lattice_0.21-8        Biobase_2.62.0        readr_2.1.4          </span></span>
+<span id="cb11-51"><a href="#cb11-51" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [85] rbibutils_2.2.16      backports_1.4.1       broom_1.0.5          </span></span>
+<span id="cb11-52"><a href="#cb11-52" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [88] Rcpp_1.0.12           xfun_0.41             MsCoreUtils_1.12.0   </span></span>
+<span id="cb11-53"><a href="#cb11-53" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [91] pkgconfig_2.0.3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 
