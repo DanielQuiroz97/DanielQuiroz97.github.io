@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.548">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Cristian Quiroz-Moreno">
+<meta name="dcterms.date" content="2023-08-11">
+
+<title>Daniel Quiroz - M2extract Part 1 - Introduction to MS2extract package</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+<meta property="og:title" content="Daniel Quiroz - M2extract Part 1 - Introduction to MS2extract package">
+<meta property="og:description" content="">
+<meta property="og:site_name" content="Daniel Quiroz">
+<meta name="twitter:title" content="Daniel Quiroz - M2extract Part 1 - Introduction to MS2extract package">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://danielquiroz97.github.io/post/20230811_MS2extract4library/img/favicon.png">
+<meta name="twitter:creator" content="@danielquirozd">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-sidebar floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Daniel Quiroz</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-mass-spectrometry" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Mass Spectrometry</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-mass-spectrometry">    
+        <li class="dropdown-header">MS/MS libraries</li>
+        <li>
+    <a class="dropdown-item" href="../../post/20230811_MS2extract4library/index.html">
+ <span class="dropdown-text">1 - MS2extract introduction</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../post/20230928_MSextract_batch/index.html">
+ <span class="dropdown-text">2 - MS2extract batch processing</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../post/20230928_MS2extract_import/index.html">
+ <span class="dropdown-text">3 - MS2extract importing data</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../post/20230928_MS2extract_tips/index.html">
+ <span class="dropdown-text">4 - MS2extract extra tips</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">Analysis and visualization</li>
+        <li>
+    <a class="dropdown-item" href="../../post/20231016_MirrorPlot/index.html">
+ <span class="dropdown-text">Creating MS/MS mirror plots</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../post/20230925_msmint_apple/index.html">
+ <span class="dropdown-text">HRMS targeted peak deconvolution</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../../post/about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools tools-wide">
+    <a href="https://github.com/DanielQuiroz97/DanielQuirozWeb" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-github"></i></a>
+    <a href="https://twitter.com/danielquirozd" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-twitter"></i></a>
+    <a href="https://www.linkedin.com/in/danielquirozmoreno/" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-linkedin"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../post/20230811_MS2extract4library/index.html">MS/MS libraries</a></li><li class="breadcrumb-item"><a href="../../post/20230811_MS2extract4library/index.html">1 - MS2extract introduction</a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">MS/MS libraries</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../post/20230811_MS2extract4library/index.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">1 - MS2extract introduction</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../post/20230928_MSextract_batch/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2 - MS2extract batch processing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../post/20230928_MS2extract_import/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">3 - MS2extract importing data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../post/20230928_MS2extract_tips/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">4 - MS2extract extra tips</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Analysis and visualization</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../post/20231016_MirrorPlot/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Creating MS/MS mirror plots</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../post/20230925_msmint_apple/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">HRMS targeted peak deconvolution</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#package-installation" id="toc-package-installation" class="nav-link active" data-scroll-target="#package-installation">Package Installation</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#basic-workflow" id="toc-basic-workflow" class="nav-link" data-scroll-target="#basic-workflow">Basic workflow</a>
+  <ul class="collapse">
+  <li><a href="#data-import" id="toc-data-import" class="nav-link" data-scroll-target="#data-import">Data import</a></li>
+  <li><a href="#extracting-msms-spectra" id="toc-extracting-msms-spectra" class="nav-link" data-scroll-target="#extracting-msms-spectra">Extracting MS/MS spectra</a></li>
+  <li><a href="#detecting-masses" id="toc-detecting-masses" class="nav-link" data-scroll-target="#detecting-masses">Detecting masses</a></li>
+  <li><a href="#msms-spectra-plot" id="toc-msms-spectra-plot" class="nav-link" data-scroll-target="#msms-spectra-plot">MS/MS spectra plot</a></li>
+  <li><a href="#exporting-msms-spectra" id="toc-exporting-msms-spectra" class="nav-link" data-scroll-target="#exporting-msms-spectra">Exporting MS/MS spectra</a></li>
+  </ul></li>
+  <li><a href="#session-info" id="toc-session-info" class="nav-link" data-scroll-target="#session-info">Session info</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../post/20230811_MS2extract4library/index.html">MS/MS libraries</a></li><li class="breadcrumb-item"><a href="../../post/20230811_MS2extract4library/index.html">1 - MS2extract introduction</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">M2extract Part 1 - Introduction to MS2extract package</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Cristian Quiroz-Moreno </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">August 11, 2023</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="package-installation" class="level2">
+<h2 class="anchored" data-anchor-id="package-installation">Package Installation</h2>
+<p>As of today, the <a href="https://github.com/CooperstoneLab/MS2extract">MS2extract</a> package can only be found at GitHub. Therefore, you can install this pacakge by:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("devtools")</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"CooperstoneLab/MS2extract"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="MS2extract_logo.png" class="quarto-figure quarto-figure-center figure-img" style="width:30.0%;height:30.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>This vignette has the objective to introduce the <strong>MS2extract</strong>. The main goal of this package is to provide a tool to create in-house MS/MS compound libraries. Users can access a specific function help through the command help(<em>[‘function name’]</em>). It is worth to note that this package is aimed in the targeted extraction of MS/MS scans and it is not able to perform compound match or annotation.</p>
+<p>A simplified workflow is presented in Figure 1. Briefly, mzMl/mzXML files are imported in memory, then based on metadata provided by the user such as analyte chemical formula, and ionization mode, MS2extract computes the theoretical precursor <em>m</em>/<em>z</em>. Then, product ion scans that matches the theoretical analyte precursor ion are extracted, with a given ppm tolerance. Next, low intensity signals, or background noise can be removed from the spectra. Finally, users can export the extracted MS/MS spectra to a MS/MS library format (.msp/.mgf) to be used as reference library for further compound identification and annotation, or deposit the created library in different repositories such as GNPS, or MassBank.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="pipeline.png" class="quarto-figure quarto-figure-center figure-img" style="width:80.0%;height:80.0%"></p>
+<figcaption>Figure 1. Overview of the processing pipeline of MS2extract</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="basic-workflow" class="level2">
+<h2 class="anchored" data-anchor-id="basic-workflow">Basic workflow</h2>
+<p>The workflow has four main steps:</p>
+<ul>
+<li>data import,</li>
+<li>extract MS/MS scans,</li>
+<li>detect masses, and</li>
+<li>export the MS/MS library</li>
+</ul>
+<p>In this section, we will explain in a more detailed manner the main steps to create in-house MS/MS libraries, as well as provide information about the required and optional arguments that users may need to provide in order to effectively use this package.</p>
+<p>Additionally, this package also includes a set of <code>batch_*()</code> functions that allows to process multiple .mzXML files at once. However, more metadata is required to run this automated pipeline and the use of this <code>batch_*()</code> functions will is described in the <a href="https://cooperstonelab.github.io/MS2extract/articles/Busing_batch_extract.html">Using MS2extract Batch Pipeline</a>.</p>
+<section id="data-import" class="level3">
+<h3 class="anchored" data-anchor-id="data-import">Data import</h3>
+<p>This section is focused on describing how MS2extract package imports MS/MS data. We also include a more detailed document about this process in the <a href="https://cooperstonelab.github.io/MS2extract/articles/Cimport_mzml_explanation.html">Behind the curtains of importing MS/MS data</a> vignette.</p>
+<p>The main import function relies on R package <a href="https://metid.tidymass.org">metID</a>. We adapted the import function in order to read mass spectrometry data from mzML/mzXML files. The new adaptation consists in importing scans data in a list (S3 object) rather than into a S4 object, facilitating the downstream tidy analysis of this object.</p>
+<blockquote class="blockquote">
+<p>This function execute a back-end calculation of theoretical ionized <em>m</em>/<em>z</em> of the compound in order to extract the precursor ions that match that mass with a given ppm.</p>
+</blockquote>
+<p>The arguments of the <code>import_mzxml()</code> functions are four:</p>
+<ul>
+<li><strong>file:</strong> mzML/mzXML file name</li>
+<li><strong>met_metadata:</strong> metadata of the analyte</li>
+<li><strong>ppm:</strong> error mass expressed in ppm</li>
+<li>…</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Loading the package</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MS2extract)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in fun(libname, pkgname): mzR has been built against a different Rcpp version (1.0.10)
+than is installed on your system (1.0.12). This might lead to errors
+when loading mzR. If you encounter such issues, please send a report,
+including the output of sessionInfo() to the Bioc support forum at 
+https://support.bioconductor.org/. For details see also
+https://github.com/sneumann/mzR/wiki/mzR-Rcpp-compiler-linker-issue.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Print function arg</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">formals</span>(import_mzxml)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$file
+NULL
+
+$met_metadata
+NULL
+
+$ppm
+[1] 10
+
+$...</code></pre>
+</div>
+</div>
+<section id="file" class="level4">
+<h4 class="anchored" data-anchor-id="file">file</h4>
+<p>File should contain the name of your mzML/mzXML file that contains MS/MS data of authentic standards or reference material. Here, we provide an example file of procyanidin A2 collected in negative ionization mode, and a collision energy of 20 eV.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Importing  Procyanidin A2 MS/MS spectra in negative ionization mode</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># and 20 eV as the collision energy</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>ProcA2_file <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">"extdata"</span>,</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"ProcyanidinA2_neg_20eV.mzXML"</span>,</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">package =</span> <span class="st">"MS2extract"</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co"># File name</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>ProcA2_file</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "/Users/quirozmoreno.1/Library/R/arm64/4.3/library/MS2extract/extdata/ProcyanidinA2_neg_20eV.mzXML"</code></pre>
+</div>
+</div>
+</section>
+<section id="met_metadata" class="level4">
+<h4 class="anchored" data-anchor-id="met_metadata">met_metadata</h4>
+<p>This argument refers to the compound metadata that user need to provide in order to properly import scans that are related to the compound of interest.</p>
+<p>The <code>met_metadata</code> is a data frame that has required and optional columns. The required columns are employed to calculate the theoretical ionized <em>m</em>/<em>z</em> for a given formula and ionization mode. In the optional columns, we have the option to provide a chromatographic region of Interest (ROI), specifying at what time the the compound elutes, in order to only keep this retention time window.</p>
+<p>The required columns are:</p>
+<ul>
+<li><strong>Formula:</strong> A character string specifying the metabolite formula</li>
+<li><strong>Ionization_mode:</strong> The ionization mode employed in data collection.</li>
+</ul>
+<p>The optional columns are:</p>
+<ul>
+<li><strong>min_rt:</strong> a double with the minimum retention time to keep (in seconds)</li>
+<li><strong>max_rt:</strong> a double with the minimum retention time to keep (in seconds)</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Procyanidin A2 metadata</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>ProcA2_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Formula =</span> <span class="st">"C30H24O12"</span>, <span class="at">Ionization_mode =</span> <span class="st">"Negative"</span>,</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">min_rt =</span> <span class="dv">163</span>, <span class="at">max_rt =</span> <span class="dv">180</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>ProcA2_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    Formula Ionization_mode min_rt max_rt
+1 C30H24O12        Negative    163    180</code></pre>
+</div>
+</div>
+</section>
+<section id="ppm" class="level4">
+<h4 class="anchored" data-anchor-id="ppm">ppm</h4>
+<p>ppm refers to the maximum m/z deviation from the theoretical mass. A ppm of 10 units will mean that the total allows <em>m</em>/<em>z</em> window in 20 ppm. By default, 10 ppm is used.</p>
+</section>
+<section id="import_mzxml" class="level4">
+<h4 class="anchored" data-anchor-id="import_mzxml"><code>import_mzxml()</code></h4>
+<p>With all arguments explained, we can use the <code>import_mzxml()</code> function.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import Procyanidin A2 data</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>ProcA2_raw <span class="ot">&lt;-</span> <span class="fu">import_mzxml</span>(ProcA2_file, <span class="at">met_metadata =</span> ProcA2_data, <span class="at">ppm =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>• Processing: ProcyanidinA2_neg_20eV.mzXML</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>• Found 1 CE value: 20</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>• Remember to match CE velues in spec_metadata when exporting your library</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>• m/z range given 5 ppm: 575.11663 and 575.12238</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 24249 rows = ions detected in all scans</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(ProcA2_raw)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 24249     6</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="extracting-msms-spectra" class="level3">
+<h3 class="anchored" data-anchor-id="extracting-msms-spectra">Extracting MS/MS spectra</h3>
+<p>Now that we have the data imported, we can proceed to extract the <strong>most intense MS/MS scan</strong>.</p>
+<p>This function computes the MS/MS total ion chromatogram (TIC) by summing up all intensities of the MS/MS scans, and selects the scan with the highest total intensity. It is worth noting that we only imported MS/MS scans that the precursor ion matches the theoretical <em>m/z</em> value of the compound provided in the previous step. Therefore, it is more accurrate to interpret this chromatogram as an EIC of the precursor ion, where only the MS/MS scans are included.</p>
+<p>This function takes three arguments:</p>
+<ul>
+<li><strong>spec:</strong> the imported MS/MS spectra</li>
+<li><strong>verbose:</strong> a boolean, if <code>verbose = TRUE</code>, the MS/MS TIC and spectra is printed, if <code>verbose = FALSE</code>, plots are not displayed</li>
+<li><strong>out_list:</strong> a boolean, if <code>out_list = TRUE</code>, the extracted MS/MS spectra table and plots are returned as list, otherwise only the MS/MS spectra is returned as data frame.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>ProcA2_extracted <span class="ot">&lt;-</span> <span class="fu">extract_MS2</span>(ProcA2_raw, <span class="at">verbose =</span> <span class="cn">TRUE</span>, <span class="at">out_list =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: `position_stack()` requires non-overlapping x intervals</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-7-1.png" style="width:100.0%;height:100.0%" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>We generated two plots, the MS/MS EIC of the precursor ion (top plot), and the MS/MS spectra of the most intense MS/MS scan (bottom plot). In the MS/MS spectra, the blue diamond is placed on top of the precursor <em>m/z</em> ion. If the diamond is filled in blue, it means the precursor ion was found in the MS/MS fragmentation data, while a diamond that is not filled will represent that the precursor ion was not found in the fragmentation data.</p>
+<p>Furthemore, we can note that the x axis in the MS/MS spectra ranges from 0 to 1700 <em>m/z</em>. This is more related to the acquisition parameters used in data callection <em>m/z</em> range: 50-1700, which creates low intensity signal that are captured and included in the resulting MS/MS spectra.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">range</span>(ProcA2_extracted<span class="sc">$</span>mz)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  100.0852 1699.0981</code></pre>
+</div>
+</div>
+<p>The range of the MS/MS <em>m</em>/<em>z</em> values are from 100 to 1699 <em>m</em>/<em>z</em>, but intensities are too low to be seen in the plot.</p>
+</section>
+<section id="detecting-masses" class="level3">
+<h3 class="anchored" data-anchor-id="detecting-masses">Detecting masses</h3>
+<p>Similarly to the <a href="http://mzmine.github.io/">MZmine pipeline</a>, detecting masses refers to setting a signal intensity threshold that MS/MS ions has to meet to be kept in the data, while signals that do not meet the defined threshold are removed. This function can also normalize the spectra ion intensity to percentage based on the base peak. This is a filtering step that is based on percentage of the base peak (most intense ion).</p>
+<p>The three required arguments are:</p>
+<ul>
+<li><strong>spec:</strong> a data frame containing the MS/MS spectra.</li>
+<li><strong>normalize:</strong> a boolean indicating if the MS/MS spectra is normalized by the base peak before proceeding to filter out low intensity signals (normalize = TRUE), if normalize = FALSE the user has to provide the minimum ion count.</li>
+<li><strong>min_int:</strong> an integer referring to the minimum ion intensity. The value of <em>min_int</em> has to be in line if user decides to normalize the spectra or not. If the spectra is normalized, the <em>min_intensity</em> value is in percentage, otherwise the <em>min_intensity</em> value is expressed in ion count units.</li>
+</ul>
+<p>By default, the normalization is set to <code>TRUE</code> and the minimum intensity is set to 1% to remove background noise.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>ProcA2_detected <span class="ot">&lt;-</span> <span class="fu">detect_mass</span>(ProcA2_extracted, <span class="at">normalize =</span> <span class="cn">TRUE</span>, <span class="at">min_int =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We can see now the range of m/z values and the maximum value is 576.1221 m/z.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">range</span>(ProcA2_detected<span class="sc">$</span>mz)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 125.0243 576.1221</code></pre>
+</div>
+</div>
+</section>
+<section id="msms-spectra-plot" class="level3">
+<h3 class="anchored" data-anchor-id="msms-spectra-plot">MS/MS spectra plot</h3>
+<p>We can proceed to plot the filtered MS/MS spectra with <code>plot_MS2spectra()</code> function. This is a ggplot2 based function; the blue diamond refers to the precursor ion.</p>
+<p>If we take a look to the previous MS/MS plot, there is less background noise in this MS/MS spectra because the low intensity ions have been removed.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_MS2spectra</span>(ProcA2_detected)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: `position_stack()` requires non-overlapping x intervals</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="exporting-msms-spectra" class="level3">
+<h3 class="anchored" data-anchor-id="exporting-msms-spectra">Exporting MS/MS spectra</h3>
+<section id="nist-.msp-format" class="level4">
+<h4 class="anchored" data-anchor-id="nist-.msp-format">NIST .msp format</h4>
+<p>Finally after extracting the MS/MS spectra and removing background noise, we can proceed to export the MS/MS in a NIST .msp format.</p>
+<p>For this task, we need extra information about the compound, such as SMILES, COLLISIONENERGY, etc. You can find the minimum required information by accessing the <code>write_msp()</code> function help by running the command <code>?write_msp</code>.</p>
+<p>An example of this table can be found at:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Reading the metadata</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>metadata_file <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">"extdata"</span>,</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"msp_metadata.csv"</span>,</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">package =</span> <span class="st">"MS2extract"</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>metadata <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(metadata_file)</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">glimpse</span>(metadata)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 1
+Columns: 8
+$ NAME            &lt;chr&gt; "Procyanidin A2"
+$ PRECURSORTYPE   &lt;chr&gt; "[M-H]-"
+$ FORMULA         &lt;chr&gt; "C30H24O12"
+$ INCHIKEY        &lt;chr&gt; "NSEWTSAADLNHNH-LSBOWGMISA-N"
+$ SMILES          &lt;chr&gt; "C1C(C(OC2=C1C(=CC3=C2C4C(C(O3)(OC5=CC(=CC(=C45)O)O)C6…
+$ IONMODE         &lt;chr&gt; "Negative"
+$ INSTRUMENTTYPE  &lt;chr&gt; "LC-ESI-QTOF"
+$ COLLISIONENERGY &lt;chr&gt; "20 eV"</code></pre>
+</div>
+</div>
+<p>The three arguments for this function are:</p>
+<ul>
+<li><strong>spec:</strong> a data frame containing the extracted MS/MS spectra</li>
+<li><strong>spec_metadata:</strong> a data frame containing the values to be including in the resulting .msp file</li>
+<li><strong>msp_name:</strong> a string with the name of the msp file not containing (.msp) extension</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write_msp</span>(</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">spec =</span> ProcA2_detected,</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">spec_metadata =</span> metadata,</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">msp_name =</span> <span class="st">"Procyanidin_A2"</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>After writing the msp file, you will see the following file content:</p>
+<div class="cell">
+<div class="cell-output cell-output-stderr">
+<pre><code>• Filtering MS/MS scans for 20 CE</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>NAME: Procyanidin A2
+PRECURSORMZ: 575.11957
+PRECURSORTYPE: [M-H]-
+FORMULA: C30H24O12
+RETENTIONTIME: 2.844
+IONMODE: Negative
+COMMENT: Spectra extracted with MS2extract R package
+INCHIKEY: NSEWTSAADLNHNH-LSBOWGMISA-N
+SMILES: C1C(C(OC2=C1C(=CC3=C2C4C(C(O3)(OC5=CC(=CC(=C45)O)O)C6=CC(=C(C=C6)O)O)O)O)C7=CC(=C(C=C7)O)O)O
+CCS: 
+COLLISIONENERGY: 20 eV
+INSTRUMENTTYPE: LC-ESI-QTOF
+Num Peaks: 38
+125.02431 10
+137.02441 3
+161.02449 2
+163.00355 3
+165.01881 2
+217.04996 2
+241.05002 2
+245.04547 2
+245.0817 2
+257.0451 2
+285.04063 62
+286.04387 4
+287.05579 7
+289.0718 48
+290.07495 3
+297.03993 4
+307.06114 2
+313.03573 2
+327.05044 7
+407.07693 16
+408.08161 2
+411.07227 9
+423.07231 53
+424.07537 5
+435.07138 3
+447.07296 5
+449.08799 51
+450.09044 6
+452.07453 15
+453.08155 7
+471.1086 2
+513.11796 2
+531.13006 2
+539.09834 22
+540.10156 3
+557.10809 5
+575.11968 100
+576.12208 13</code></pre>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="session-info" class="level2">
+<h2 class="anchored" data-anchor-id="session-info">Session info</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>R version 4.3.1 (2023-06-16)
+Platform: aarch64-apple-darwin20 (64-bit)
+Running under: macOS Sonoma 14.3
+
+Matrix products: default
+BLAS:   /Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/lib/libRblas.0.dylib 
+LAPACK: /Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/lib/libRlapack.dylib;  LAPACK version 3.11.0
+
+locale:
+[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+
+time zone: America/New_York
+tzcode source: internal
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+[1] MS2extract_0.01.0
+
+loaded via a namespace (and not attached):
+ [1] tidyselect_1.2.0      farver_2.1.1          dplyr_1.1.4          
+ [4] fastmap_1.1.1         XML_3.99-0.14         digest_0.6.33        
+ [7] lifecycle_1.0.4       cluster_2.1.4         ProtGenerics_1.32.0  
+[10] magrittr_2.0.3        compiler_4.3.1        rlang_1.1.3          
+[13] tools_4.3.1           utf8_1.2.4            yaml_2.3.8           
+[16] knitr_1.45            ggsignif_0.6.4        labeling_0.4.3       
+[19] htmlwidgets_1.6.4     plyr_1.8.9            abind_1.4-5          
+[22] BiocParallel_1.34.2   withr_2.5.2           purrr_1.0.2          
+[25] BiocGenerics_0.48.1   grid_4.3.1            stats4_4.3.1         
+[28] preprocessCore_1.62.1 fansi_1.0.6           ggpubr_0.6.0         
+[31] colorspace_2.1-0      ggplot2_3.4.4         scales_1.3.0         
+[34] iterators_1.0.14      MASS_7.3-60           cli_3.6.2            
+[37] mzR_2.34.1            rmarkdown_2.25        generics_0.1.3       
+[40] Rdisop_1.60.0         tzdb_0.4.0            readxl_1.4.3         
+[43] ncdf4_1.21            affy_1.78.2           zlibbioc_1.46.0      
+[46] parallel_4.3.1        impute_1.74.1         cellranger_1.1.0     
+[49] BiocManager_1.30.22   vsn_3.68.0            vctrs_0.6.5          
+[52] jsonlite_1.8.8        carData_3.0-5         car_3.1-2            
+[55] hms_1.1.3             IRanges_2.34.1        S4Vectors_0.38.2     
+[58] MALDIquant_1.22.1     rstatix_0.7.2         ggrepel_0.9.4        
+[61] clue_0.3-65           foreach_1.5.2         limma_3.56.2         
+[64] tidyr_1.3.0           affyio_1.70.0         glue_1.7.0           
+[67] MSnbase_2.26.0        codetools_0.2-19      cowplot_1.1.1        
+[70] gtable_0.3.4          OrgMassSpecR_0.5-3    mzID_1.38.0          
+[73] munsell_0.5.0         tibble_3.2.1          pillar_1.9.0         
+[76] pcaMethods_1.92.0     htmltools_0.5.7       R6_2.5.1             
+[79] Rdpack_2.6            doParallel_1.0.17     evaluate_0.23        
+[82] lattice_0.21-8        Biobase_2.62.0        readr_2.1.4          
+[85] rbibutils_2.2.16      backports_1.4.1       broom_1.0.5          
+[88] Rcpp_1.0.12           xfun_0.41             MsCoreUtils_1.12.0   
+[91] pkgconfig_2.0.3      </code></pre>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
