@@ -1,31 +1,47 @@
 [
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Omics-based Data Analysis",
+    "objectID": "post/20230925_msmint_apple/index.html",
+    "href": "post/20230925_msmint_apple/index.html",
+    "title": "Using ms-mint for targeted peak integration of Mass Spec data",
     "section": "",
-    "text": "I’ll be brief, this is a personal website to share documentation and useful resources about mass spec, metabolomics, and microbiome metagenomics data analysis. More information about myself, please visit the About page."
+    "text": "Goal of this notebook\nThis notebook has the objective to exemplify the use of targeted integration of phytochemicals that are present in untargeted metabolomics data of apple fruit reported in Bilbrey et al. (2022)\nIn this case, we are going to use only the quality control (QC) samples.",
+    "crumbs": [
+      "Analysis and visualization",
+      "HRMS targeted peak deconvolution"
+    ]
   },
   {
-    "objectID": "index.html#daniel-quiroz-personal-blog",
-    "href": "index.html#daniel-quiroz-personal-blog",
-    "title": "Omics-based Data Analysis",
-    "section": "",
-    "text": "I’ll be brief, this is a personal website to share documentation and useful resources about mass spec, metabolomics, and microbiome metagenomics data analysis. More information about myself, please visit the About page."
+    "objectID": "post/20230925_msmint_apple/index.html#importing-python-libraries",
+    "href": "post/20230925_msmint_apple/index.html#importing-python-libraries",
+    "title": "Using ms-mint for targeted peak integration of Mass Spec data",
+    "section": "Importing python libraries",
+    "text": "Importing python libraries\nImporting python libraries\nIn this section, we will upload the required libraries in order to targeted integrate a series of phytochemicals found in apples fruits. The main library for this purpose is ms-mint which allows to integrate ions of interest. In our case, each ion of interest refers to a specific phytochemical. For example, chlorogenic acid with a monoisotopic mass of 354.0950 Da. Thus, the ion in positive ionization mode will be 355.1023 m/z, while an ion of 353.0877 m/z corresponds to negative ionization.\n# ms-mint: Instance for MS spectrometry data\nfrom ms_mint.Mint import Mint\nimport pandas as pd # Data wrangling\nimport numpy as np\nimport re # Regular expressions\nimport glob # listing files\nimport seaborn as sns\nimport plotly.express as px # Interactive plots\nimport pickle # Export python object\n#from ms_mint.notebook import Mint\nmint = Mint()",
+    "crumbs": [
+      "Analysis and visualization",
+      "HRMS targeted peak deconvolution"
+    ]
   },
   {
-    "objectID": "index.html#latest-blogs",
-    "href": "index.html#latest-blogs",
-    "title": "Omics-based Data Analysis",
-    "section": "Latest blogs",
-    "text": "Latest blogs\n\nM2extract Part 1 - Introduction to MS2extract package (Link)\nMS2extract Part 2 - Using the MS2extract batch pipeline (Link)\nMS2extract Part 3 - Behind the curtains of importing MS/MS data (Link)\nMS2extract Part 4 - Using MSconvert to filter useful MS/MS data (Link)"
+    "objectID": "post/20230925_msmint_apple/index.html#selecting-qcs-files",
+    "href": "post/20230925_msmint_apple/index.html#selecting-qcs-files",
+    "title": "Using ms-mint for targeted peak integration of Mass Spec data",
+    "section": "Selecting QCs files",
+    "text": "Selecting QCs files\n\nNegative ionization\nHere, we are going to select all QC files, and we are printing the first 5 QC files.\nQC_files_neg = glob.glob(\"Data/mzML/Neg/QC*\")\nmint.ms_files = QC_files_neg\nmint.ms_files[0:5]\n\n['Data/mzML/Neg/QC_035.mzML',\n 'Data/mzML/Neg/QC_189.mzML',\n 'Data/mzML/Neg/QC_042.mzML',\n 'Data/mzML/Neg/QC_014.mzML',\n 'Data/mzML/Neg/QC_147.mzML']\n\n\nTarget ion list\ntarget_list_neg = pd.read_excel(\"Data/Tables/targets.xlsx\", sheet_name = \"target_neg\")\nmint.targets = target_list_neg\nmint.targets\n\nDT::datatable(target_neg)\n\n\n\n\n\n\n\nRunning targeted integration\nmint.run(fn = 'Results/Neg/raw_integration.csv')\n&lt;ms_mint.Mint.Mint at 0x109083610&gt;\nmint.plot.peak_shapes(col_wrap=3)",
+    "crumbs": [
+      "Analysis and visualization",
+      "HRMS targeted peak deconvolution"
+    ]
   },
   {
-    "objectID": "index.html#latest-publications",
-    "href": "index.html#latest-publications",
-    "title": "Omics-based Data Analysis",
-    "section": "Latest publications",
-    "text": "Latest publications\nThe most recent publications are:\n\n2024 - Jefferson V Pastuña-Fasso, Cristian Quiroz-Moreno, et al. Metabolite fingerprinting of Urospatha sagittifolia (Araceae) tubers at different growth stages by multi-platform metabolomics and molecular networking. Microchemical journal (link).\n2024 - C. Alfonso Molina, Cristian Quiroz-Moreno, et al.,Bacterial community assessment of drinking water and downstream distribution systems in highland localities of Ecuador . Journal of Water and Health (link).\n\nIf you are intersted to see the full list of publications, please visit the Abaut page."
+    "objectID": "post/20230925_msmint_apple/index.html#positive-ionization",
+    "href": "post/20230925_msmint_apple/index.html#positive-ionization",
+    "title": "Using ms-mint for targeted peak integration of Mass Spec data",
+    "section": "Positive ionization",
+    "text": "Positive ionization\nOn the other side of the ionization polarity, for positive ionization, we proceed with the same workflow; describing the QCs files first, and uploading the target list second.\n['Data/mzML/Pos/QC_035.mzML',\n 'Data/mzML/Pos/QC_189.mzML',\n 'Data/mzML/Pos/QC_014.mzML',\n 'Data/mzML/Pos/QC_147.mzML',\n 'Data/mzML/Pos/QC_203.mzML']\n\nLoading targets\ntargets_pos = pd.read_excel(\"Data/Tables/targets.xlsx\", sheet_name = \"target_pos\")\nmint.targets = targets_pos\nmint.targets\n\nDT::datatable(target_pos)\n\n\n\n\n\n\n\nRunning targeted extraction\nmint.run(fn = 'Results/Pos/raw_integration.csv')\n&lt;ms_mint.Mint.Mint at 0x109083610&gt;\nmint.plot.peak_shapes(col_wrap=3)",
+    "crumbs": [
+      "Analysis and visualization",
+      "HRMS targeted peak deconvolution"
+    ]
   },
   {
     "objectID": "post/20230928_MS2extract_import/index.html",
@@ -69,61 +85,6 @@
     "crumbs": [
       "MS/MS libraries",
       "3 - MS2extract importing data"
-    ]
-  },
-  {
-    "objectID": "post/20230928_MS2extract_tips/index.html",
-    "href": "post/20230928_MS2extract_tips/index.html",
-    "title": "MS2extract Part 4 - Using MSconvert to filter useful MS/MS data",
-    "section": "",
-    "text": "In this document, you will find more information describing multiple scenarios about how to use MSconvert in order to transform your raw MS/MS data to .mzMl or mzXML format in order to be imported with MS2extract.\nHere, we will explore three different scenarios that you might find useful depending on your MS/MS data collection approach. The explained scenarios are:\n\nConverting to .mzML the entire run,\nTrimming for specific retention time, and\nExtracting MS/MS scans of multiples CE from the same run\n\n*Note:* this is the fourth vignette for this package and if you find some terms unclear, or are not familiar with the concepts, please visit the previous vignettes (Package introduction, Batch mode introduction, and Importing MS/MS data).",
-    "crumbs": [
-      "MS/MS libraries",
-      "4 - MS2extract extra tips"
-    ]
-  },
-  {
-    "objectID": "post/20230928_MS2extract_tips/index.html#goal-of-this-document",
-    "href": "post/20230928_MS2extract_tips/index.html#goal-of-this-document",
-    "title": "MS2extract Part 4 - Using MSconvert to filter useful MS/MS data",
-    "section": "",
-    "text": "In this document, you will find more information describing multiple scenarios about how to use MSconvert in order to transform your raw MS/MS data to .mzMl or mzXML format in order to be imported with MS2extract.\nHere, we will explore three different scenarios that you might find useful depending on your MS/MS data collection approach. The explained scenarios are:\n\nConverting to .mzML the entire run,\nTrimming for specific retention time, and\nExtracting MS/MS scans of multiples CE from the same run\n\n*Note:* this is the fourth vignette for this package and if you find some terms unclear, or are not familiar with the concepts, please visit the previous vignettes (Package introduction, Batch mode introduction, and Importing MS/MS data).",
-    "crumbs": [
-      "MS/MS libraries",
-      "4 - MS2extract extra tips"
-    ]
-  },
-  {
-    "objectID": "post/20230928_MS2extract_tips/index.html#case-1-converting-to-.mzml-the-entire-run",
-    "href": "post/20230928_MS2extract_tips/index.html#case-1-converting-to-.mzml-the-entire-run",
-    "title": "MS2extract Part 4 - Using MSconvert to filter useful MS/MS data",
-    "section": "Case 1: Converting to .mzML the entire run",
-    "text": "Case 1: Converting to .mzML the entire run\nIn this case, although is not the optimal approach, it will get the job done, if your data meets a requirement.\n\nRequirement: the precursor ion of your standard has to produce the most intense MS/MS signal in the entire run.\n\n\nRequirement: If you have isomers in the same run, but they elute at different retention times, you must provide different retention times windows.\n\nSince MS2extract searches for the most intense MS/MS scan, you can only have one metabolite per run if you do not provide different retention time windows.\nSince this package only works with MS/MS data, we are only going to keep scans with MS/MS data. Therefore, the MSconvert filters are:\n\n\n\nFilter\nParameters\n\n\n\n\npeakPicking\nvendor msLevel=2-2\n\n\nmsLevel\n2-2",
-    "crumbs": [
-      "MS/MS libraries",
-      "4 - MS2extract extra tips"
-    ]
-  },
-  {
-    "objectID": "post/20230928_MS2extract_tips/index.html#case-2-trimming-for-specific-retention-time",
-    "href": "post/20230928_MS2extract_tips/index.html#case-2-trimming-for-specific-retention-time",
-    "title": "MS2extract Part 4 - Using MSconvert to filter useful MS/MS data",
-    "section": "Case 2: Trimming for specific retention time",
-    "text": "Case 2: Trimming for specific retention time\nThis is probably the most efficient approach to convert your raw data files, since you already know the retention time of your metabolite. Then, you can use the scanTime filter. Remember, scan time has to be converted to seconds, not minutes.\nWe used this approach to build the entire PhenolicsDB repository, where you can find the retention time window for each metabolite.\n\n\n\nFilter\nParameters\n\n\n\n\npeakPicking\nvendor msLevel=2-2\n\n\nmsLevel\n2-2\n\n\nscanTime\n[min rt, max rt]\n\n\n\nIn the following example, we are using the procyanidin B2 standard data, with a elution time of 138 (s), and the minimum and maximum retention time are 133 and 145 (s), respectively. Therefore, the MSconvert task will look like the following image.",
-    "crumbs": [
-      "MS/MS libraries",
-      "4 - MS2extract extra tips"
-    ]
-  },
-  {
-    "objectID": "post/20230928_MS2extract_tips/index.html#case-3-multiple-ce-in-the-same-run",
-    "href": "post/20230928_MS2extract_tips/index.html#case-3-multiple-ce-in-the-same-run",
-    "title": "MS2extract Part 4 - Using MSconvert to filter useful MS/MS data",
-    "section": "Case 3: Multiple CE in the same run",
-    "text": "Case 3: Multiple CE in the same run\nUnfortunately, the current version of MS2extract does not support importing MS/MS data with different CE in the same run. Then, the user will need to manually separate different CE in different files as it is explained below.\nFor this example, we are going to use guaijaverin (quercetin 3-arabinopyranoside) to exemplify this case. In the following image, you can see the EIC of this metabolite in negative polarity. Then, the first MS/MS spectra refers to the fragmentation pattern at 60 eV, while the second MS/MS spectra refers to 80 eV.\n\nNow, in order to separate scans in MSconvert we need to specify one CE at a time. Here, you can see that we are using the collisionEnergy filter to subset MS/MS scans with a CE of 60 eV. Then, the filters for this metabolite will be:\n\n\n\nFilter\nParameters\n\n\n\n\npeakPicking\nvendor msLevel=2-2\n\n\nmsLevel\n2-2\n\n\nscanTime\n[min rt, max rt]\n\n\ncollisionEnergy\nlow=60 high=60\n\n\n\n\nOnce you convert this raw data file to mzML at 60 eV, you can change the collision energy to a different value and then convert for the rest of available CE values. The same principle can be applied for MS/MS data with multiple polarities in the same run.\n\nNote: remember to change the .mzml file name as it will overwrite the file with the new CE value.",
-    "crumbs": [
-      "MS/MS libraries",
-      "4 - MS2extract extra tips"
     ]
   },
   {
@@ -193,92 +154,6 @@
     ]
   },
   {
-    "objectID": "post/20230925_msmint_apple/index.html",
-    "href": "post/20230925_msmint_apple/index.html",
-    "title": "Using ms-mint for targeted peak integration of Mass Spec data",
-    "section": "",
-    "text": "Goal of this notebook\nThis notebook has the objective to exemplify the use of targeted integration of phytochemicals that are present in untargeted metabolomics data of apple fruit reported in Bilbrey et al. (2022)\nIn this case, we are going to use only the quality control (QC) samples.",
-    "crumbs": [
-      "Analysis and visualization",
-      "HRMS targeted peak deconvolution"
-    ]
-  },
-  {
-    "objectID": "post/20230925_msmint_apple/index.html#importing-python-libraries",
-    "href": "post/20230925_msmint_apple/index.html#importing-python-libraries",
-    "title": "Using ms-mint for targeted peak integration of Mass Spec data",
-    "section": "Importing python libraries",
-    "text": "Importing python libraries\nImporting python libraries\nIn this section, we will upload the required libraries in order to targeted integrate a series of phytochemicals found in apples fruits. The main library for this purpose is ms-mint which allows to integrate ions of interest. In our case, each ion of interest refers to a specific phytochemical. For example, chlorogenic acid with a monoisotopic mass of 354.0950 Da. Thus, the ion in positive ionization mode will be 355.1023 m/z, while an ion of 353.0877 m/z corresponds to negative ionization.\n# ms-mint: Instance for MS spectrometry data\nfrom ms_mint.Mint import Mint\nimport pandas as pd # Data wrangling\nimport numpy as np\nimport re # Regular expressions\nimport glob # listing files\nimport seaborn as sns\nimport plotly.express as px # Interactive plots\nimport pickle # Export python object\n#from ms_mint.notebook import Mint\nmint = Mint()",
-    "crumbs": [
-      "Analysis and visualization",
-      "HRMS targeted peak deconvolution"
-    ]
-  },
-  {
-    "objectID": "post/20230925_msmint_apple/index.html#selecting-qcs-files",
-    "href": "post/20230925_msmint_apple/index.html#selecting-qcs-files",
-    "title": "Using ms-mint for targeted peak integration of Mass Spec data",
-    "section": "Selecting QCs files",
-    "text": "Selecting QCs files\n\nNegative ionization\nHere, we are going to select all QC files, and we are printing the first 5 QC files.\nQC_files_neg = glob.glob(\"Data/mzML/Neg/QC*\")\nmint.ms_files = QC_files_neg\nmint.ms_files[0:5]\n\n['Data/mzML/Neg/QC_035.mzML',\n 'Data/mzML/Neg/QC_189.mzML',\n 'Data/mzML/Neg/QC_042.mzML',\n 'Data/mzML/Neg/QC_014.mzML',\n 'Data/mzML/Neg/QC_147.mzML']\n\n\nTarget ion list\ntarget_list_neg = pd.read_excel(\"Data/Tables/targets.xlsx\", sheet_name = \"target_neg\")\nmint.targets = target_list_neg\nmint.targets\n\nDT::datatable(target_neg)\n\n\n\n\n\n\n\nRunning targeted integration\nmint.run(fn = 'Results/Neg/raw_integration.csv')\n&lt;ms_mint.Mint.Mint at 0x109083610&gt;\nmint.plot.peak_shapes(col_wrap=3)",
-    "crumbs": [
-      "Analysis and visualization",
-      "HRMS targeted peak deconvolution"
-    ]
-  },
-  {
-    "objectID": "post/20230925_msmint_apple/index.html#positive-ionization",
-    "href": "post/20230925_msmint_apple/index.html#positive-ionization",
-    "title": "Using ms-mint for targeted peak integration of Mass Spec data",
-    "section": "Positive ionization",
-    "text": "Positive ionization\nOn the other side of the ionization polarity, for positive ionization, we proceed with the same workflow; describing the QCs files first, and uploading the target list second.\n['Data/mzML/Pos/QC_035.mzML',\n 'Data/mzML/Pos/QC_189.mzML',\n 'Data/mzML/Pos/QC_014.mzML',\n 'Data/mzML/Pos/QC_147.mzML',\n 'Data/mzML/Pos/QC_203.mzML']\n\nLoading targets\ntargets_pos = pd.read_excel(\"Data/Tables/targets.xlsx\", sheet_name = \"target_pos\")\nmint.targets = targets_pos\nmint.targets\n\nDT::datatable(target_pos)\n\n\n\n\n\n\n\nRunning targeted extraction\nmint.run(fn = 'Results/Pos/raw_integration.csv')\n&lt;ms_mint.Mint.Mint at 0x109083610&gt;\nmint.plot.peak_shapes(col_wrap=3)",
-    "crumbs": [
-      "Analysis and visualization",
-      "HRMS targeted peak deconvolution"
-    ]
-  },
-  {
-    "objectID": "post/about.html",
-    "href": "post/about.html",
-    "title": "Daniel Quiroz",
-    "section": "",
-    "text": "Greetings! I’m a dedicated PhD candidate at the Cooperstone Lab within The Ohio State University, where my passion lies in the fascinating intersection of metabolomics and genomics. My doctoral journey revolves around unraveling the genomic regions orchestrating the expression of phytochemicals—a mission that fuels my curiosity and intellectual drive."
-  },
-  {
-    "objectID": "post/about.html#about-me",
-    "href": "post/about.html#about-me",
-    "title": "Daniel Quiroz",
-    "section": "",
-    "text": "Greetings! I’m a dedicated PhD candidate at the Cooperstone Lab within The Ohio State University, where my passion lies in the fascinating intersection of metabolomics and genomics. My doctoral journey revolves around unraveling the genomic regions orchestrating the expression of phytochemicals—a mission that fuels my curiosity and intellectual drive."
-  },
-  {
-    "objectID": "post/about.html#software-development",
-    "href": "post/about.html#software-development",
-    "title": "Daniel Quiroz",
-    "section": "Software development",
-    "text": "Software development\nMy expertise extends beyond the lab bench. I’m an enthusiastic mass spectrometry aficionado and a skilled software developer, and I’ve recently undertaken some exciting projects:\n\nMS2extract: I’ve crafted an R package designed to construct in-house MS/MS libraries, facilitating advanced mass spectrometry analyses.\nPhenolicsDB: I’ve created a specialized MS/MS database, dedicated to the intricate world of phenolic compounds.\nRGCxGC: My R package streamlines the end-to-end processing of GCxGC-MS data, simplifying complex data analysis."
-  },
-  {
-    "objectID": "post/about.html#data-analysis",
-    "href": "post/about.html#data-analysis",
-    "title": "Daniel Quiroz",
-    "section": "Data analysis",
-    "text": "Data analysis\nTo delve into my work further, take a look at my repositories, where you’ll find examples of mass spectrometry data analysis, as well as my ventures into microbiome analysis:\n\nMass Spectrometry\n\nApple phytochemicals: Targeted peak integration of MS data of phytochemicals present in apples.\nUruspatha sagittifolia metabolomics: Exploring the metabolome of a plant with the power of stoping snake venom.\n\n\n\nMicrobiome\n\nOrnamental Floral microbiome: Metagenomics analysis of the rhizosphere of ornamental cultivars.\nMicrobiome present in Cayambe glaciar: Here, we explored the microbiome present in a tropical glacier.\nMicrobiome present in Sumaco stratovolcano: Here, we explored the microbiome present in a tropical sleeping volcano."
-  },
-  {
-    "objectID": "post/about.html#teaching-and-mentoring",
-    "href": "post/about.html#teaching-and-mentoring",
-    "title": "Daniel Quiroz",
-    "section": "Teaching and mentoring",
-    "text": "Teaching and mentoring\nBeyond my research, I’m deeply committed to the realms of teaching and mentoring. I’m currently serving as a teaching assistant for the DataViz in R, and I find great fulfillment in guiding for the second time. Additionally, I’m a mentor within the Metabolomics Group at Ikiam University, where I’m devoted to nurturing the next generation of scientists.\nIn essence, my journey is a fusion of scientific exploration, software innovation, and the joy of passing on knowledge. If you share my passion for metabolomics, genomics, or data science, let’s connect and embark on a journey of discovery together!"
-  },
-  {
-    "objectID": "post/about.html#recent-publications",
-    "href": "post/about.html#recent-publications",
-    "title": "Daniel Quiroz",
-    "section": "Recent Publications",
-    "text": "Recent Publications\n\n2024 - Jefferson V Pastuña-Fasso, Cristian Quiroz-Moreno, et al. Metabolite fingerprinting of Urospatha sagittifolia (Araceae) tubers at different growth stages by multi-platform metabolomics and molecular networking. Microchemical journal (link).\n2024 - C. Alfonso Molina, Cristian Quiroz-Moreno, et al.,Bacterial community assessment of drinking water and downstream distribution systems in highland localities of Ecuador . Journal of Water and Health (link).\n2023 - Magdalena Dias, Pablo Monfort-Lanzas, Cristian Quiroz-Moreno, et al., The microbiome of the ice-capped Cayambe Volcanic Complex in Ecuador. Frotiers in Microbioloy (link).\n2022 - Magdalena Dias, Cristian Quiroz-Moreno, et al., Soil bacterial community along an altitudinal gradient in the Sumaco, a stratovolcano in the Amazon region. Frontiers in Forest and Global Change (link).\n2022- Mallory L. Goggans, Emma A. Bilgrey, Cristian Quiroz-Moreno, et. al., Short-Term Tomato Consumption Alters the Pig Gut Microbiome toward a More Favorable Profile. Mirobiology Spectrum (link).\n2020 - Cristian Quiroz-Moreno, et. al., RGCxGC toolbox: an R-package for data processing in comprehensive two-dimensional gas chromatography-mass spectrometry. Microchemical Journal (link).\n2018 - Noroska Salazar, Cristian Quiroz-Moreno, et. al.,\nNew advances in toxicological forensic analysis using mass spectrometry techniques. Journal of Analytical Methods in Chemistry (link)."
-  },
-  {
     "objectID": "post/20230811_MS2extract4library/index.html",
     "href": "post/20230811_MS2extract4library/index.html",
     "title": "M2extract Part 1 - Introduction to MS2extract package",
@@ -332,6 +207,131 @@
       "MS/MS libraries",
       "1 - MS2extract introduction"
     ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Omics-based Data Analysis",
+    "section": "",
+    "text": "I’ll be brief, this is a personal website to share documentation and useful resources about mass spec, metabolomics, and microbiome metagenomics data analysis. More information about myself, please visit the About page."
+  },
+  {
+    "objectID": "index.html#daniel-quiroz-personal-blog",
+    "href": "index.html#daniel-quiroz-personal-blog",
+    "title": "Omics-based Data Analysis",
+    "section": "",
+    "text": "I’ll be brief, this is a personal website to share documentation and useful resources about mass spec, metabolomics, and microbiome metagenomics data analysis. More information about myself, please visit the About page."
+  },
+  {
+    "objectID": "index.html#latest-blogs",
+    "href": "index.html#latest-blogs",
+    "title": "Omics-based Data Analysis",
+    "section": "Latest blogs",
+    "text": "Latest blogs\n\nM2extract Part 1 - Introduction to MS2extract package (Link)\nMS2extract Part 2 - Using the MS2extract batch pipeline (Link)\nMS2extract Part 3 - Behind the curtains of importing MS/MS data (Link)\nMS2extract Part 4 - Using MSconvert to filter useful MS/MS data (Link)"
+  },
+  {
+    "objectID": "index.html#latest-publications",
+    "href": "index.html#latest-publications",
+    "title": "Omics-based Data Analysis",
+    "section": "Latest publications",
+    "text": "Latest publications\nThe most recent publications are:\n\n2024 - Jefferson V Pastuña-Fasso, Cristian Quiroz-Moreno, et al. Metabolite fingerprinting of Urospatha sagittifolia (Araceae) tubers at different growth stages by multi-platform metabolomics and molecular networking. Microchemical journal (link).\n2024 - C. Alfonso Molina, Cristian Quiroz-Moreno, et al.,Bacterial community assessment of drinking water and downstream distribution systems in highland localities of Ecuador . Journal of Water and Health (link).\n\nIf you are intersted to see the full list of publications, please visit the Abaut page."
+  },
+  {
+    "objectID": "post/20230928_MS2extract_tips/index.html",
+    "href": "post/20230928_MS2extract_tips/index.html",
+    "title": "MS2extract Part 4 - Using MSconvert to filter useful MS/MS data",
+    "section": "",
+    "text": "In this document, you will find more information describing multiple scenarios about how to use MSconvert in order to transform your raw MS/MS data to .mzMl or mzXML format in order to be imported with MS2extract.\nHere, we will explore three different scenarios that you might find useful depending on your MS/MS data collection approach. The explained scenarios are:\n\nConverting to .mzML the entire run,\nTrimming for specific retention time, and\nExtracting MS/MS scans of multiples CE from the same run\n\n*Note:* this is the fourth vignette for this package and if you find some terms unclear, or are not familiar with the concepts, please visit the previous vignettes (Package introduction, Batch mode introduction, and Importing MS/MS data).",
+    "crumbs": [
+      "MS/MS libraries",
+      "4 - MS2extract extra tips"
+    ]
+  },
+  {
+    "objectID": "post/20230928_MS2extract_tips/index.html#goal-of-this-document",
+    "href": "post/20230928_MS2extract_tips/index.html#goal-of-this-document",
+    "title": "MS2extract Part 4 - Using MSconvert to filter useful MS/MS data",
+    "section": "",
+    "text": "In this document, you will find more information describing multiple scenarios about how to use MSconvert in order to transform your raw MS/MS data to .mzMl or mzXML format in order to be imported with MS2extract.\nHere, we will explore three different scenarios that you might find useful depending on your MS/MS data collection approach. The explained scenarios are:\n\nConverting to .mzML the entire run,\nTrimming for specific retention time, and\nExtracting MS/MS scans of multiples CE from the same run\n\n*Note:* this is the fourth vignette for this package and if you find some terms unclear, or are not familiar with the concepts, please visit the previous vignettes (Package introduction, Batch mode introduction, and Importing MS/MS data).",
+    "crumbs": [
+      "MS/MS libraries",
+      "4 - MS2extract extra tips"
+    ]
+  },
+  {
+    "objectID": "post/20230928_MS2extract_tips/index.html#case-1-converting-to-.mzml-the-entire-run",
+    "href": "post/20230928_MS2extract_tips/index.html#case-1-converting-to-.mzml-the-entire-run",
+    "title": "MS2extract Part 4 - Using MSconvert to filter useful MS/MS data",
+    "section": "Case 1: Converting to .mzML the entire run",
+    "text": "Case 1: Converting to .mzML the entire run\nIn this case, although is not the optimal approach, it will get the job done, if your data meets a requirement.\n\nRequirement: the precursor ion of your standard has to produce the most intense MS/MS signal in the entire run.\n\n\nRequirement: If you have isomers in the same run, but they elute at different retention times, you must provide different retention times windows.\n\nSince MS2extract searches for the most intense MS/MS scan, you can only have one metabolite per run if you do not provide different retention time windows.\nSince this package only works with MS/MS data, we are only going to keep scans with MS/MS data. Therefore, the MSconvert filters are:\n\n\n\nFilter\nParameters\n\n\n\n\npeakPicking\nvendor msLevel=2-2\n\n\nmsLevel\n2-2",
+    "crumbs": [
+      "MS/MS libraries",
+      "4 - MS2extract extra tips"
+    ]
+  },
+  {
+    "objectID": "post/20230928_MS2extract_tips/index.html#case-2-trimming-for-specific-retention-time",
+    "href": "post/20230928_MS2extract_tips/index.html#case-2-trimming-for-specific-retention-time",
+    "title": "MS2extract Part 4 - Using MSconvert to filter useful MS/MS data",
+    "section": "Case 2: Trimming for specific retention time",
+    "text": "Case 2: Trimming for specific retention time\nThis is probably the most efficient approach to convert your raw data files, since you already know the retention time of your metabolite. Then, you can use the scanTime filter. Remember, scan time has to be converted to seconds, not minutes.\nWe used this approach to build the entire PhenolicsDB repository, where you can find the retention time window for each metabolite.\n\n\n\nFilter\nParameters\n\n\n\n\npeakPicking\nvendor msLevel=2-2\n\n\nmsLevel\n2-2\n\n\nscanTime\n[min rt, max rt]\n\n\n\nIn the following example, we are using the procyanidin B2 standard data, with a elution time of 138 (s), and the minimum and maximum retention time are 133 and 145 (s), respectively. Therefore, the MSconvert task will look like the following image.",
+    "crumbs": [
+      "MS/MS libraries",
+      "4 - MS2extract extra tips"
+    ]
+  },
+  {
+    "objectID": "post/20230928_MS2extract_tips/index.html#case-3-multiple-ce-in-the-same-run",
+    "href": "post/20230928_MS2extract_tips/index.html#case-3-multiple-ce-in-the-same-run",
+    "title": "MS2extract Part 4 - Using MSconvert to filter useful MS/MS data",
+    "section": "Case 3: Multiple CE in the same run",
+    "text": "Case 3: Multiple CE in the same run\nUnfortunately, the current version of MS2extract does not support importing MS/MS data with different CE in the same run. Then, the user will need to manually separate different CE in different files as it is explained below.\nFor this example, we are going to use guaijaverin (quercetin 3-arabinopyranoside) to exemplify this case. In the following image, you can see the EIC of this metabolite in negative polarity. Then, the first MS/MS spectra refers to the fragmentation pattern at 60 eV, while the second MS/MS spectra refers to 80 eV.\n\nNow, in order to separate scans in MSconvert we need to specify one CE at a time. Here, you can see that we are using the collisionEnergy filter to subset MS/MS scans with a CE of 60 eV. Then, the filters for this metabolite will be:\n\n\n\nFilter\nParameters\n\n\n\n\npeakPicking\nvendor msLevel=2-2\n\n\nmsLevel\n2-2\n\n\nscanTime\n[min rt, max rt]\n\n\ncollisionEnergy\nlow=60 high=60\n\n\n\n\nOnce you convert this raw data file to mzML at 60 eV, you can change the collision energy to a different value and then convert for the rest of available CE values. The same principle can be applied for MS/MS data with multiple polarities in the same run.\n\nNote: remember to change the .mzml file name as it will overwrite the file with the new CE value.",
+    "crumbs": [
+      "MS/MS libraries",
+      "4 - MS2extract extra tips"
+    ]
+  },
+  {
+    "objectID": "post/about.html",
+    "href": "post/about.html",
+    "title": "Daniel Quiroz",
+    "section": "",
+    "text": "Greetings! I’m a dedicated PhD candidate at the Cooperstone Lab within The Ohio State University, where my passion lies in the fascinating intersection of metabolomics and genomics. My doctoral journey revolves around unraveling the genomic regions orchestrating the expression of phytochemicals—a mission that fuels my curiosity and intellectual drive."
+  },
+  {
+    "objectID": "post/about.html#about-me",
+    "href": "post/about.html#about-me",
+    "title": "Daniel Quiroz",
+    "section": "",
+    "text": "Greetings! I’m a dedicated PhD candidate at the Cooperstone Lab within The Ohio State University, where my passion lies in the fascinating intersection of metabolomics and genomics. My doctoral journey revolves around unraveling the genomic regions orchestrating the expression of phytochemicals—a mission that fuels my curiosity and intellectual drive."
+  },
+  {
+    "objectID": "post/about.html#software-development",
+    "href": "post/about.html#software-development",
+    "title": "Daniel Quiroz",
+    "section": "Software development",
+    "text": "Software development\nMy expertise extends beyond the lab bench. I’m an enthusiastic mass spectrometry aficionado and a skilled software developer, and I’ve recently undertaken some exciting projects:\n\nMS2extract: I’ve crafted an R package designed to construct in-house MS/MS libraries, facilitating advanced mass spectrometry analyses.\nPhenolicsDB: I’ve created a specialized MS/MS database, dedicated to the intricate world of phenolic compounds.\nRGCxGC: My R package streamlines the end-to-end processing of GCxGC-MS data, simplifying complex data analysis."
+  },
+  {
+    "objectID": "post/about.html#data-analysis",
+    "href": "post/about.html#data-analysis",
+    "title": "Daniel Quiroz",
+    "section": "Data analysis",
+    "text": "Data analysis\nTo delve into my work further, take a look at my repositories, where you’ll find examples of mass spectrometry data analysis, as well as my ventures into microbiome analysis:\n\nMass Spectrometry\n\nApple phytochemicals: Targeted peak integration of MS data of phytochemicals present in apples.\nUruspatha sagittifolia metabolomics: Exploring the metabolome of a plant with the power of stoping snake venom.\n\n\n\nMicrobiome\n\nOrnamental Floral microbiome: Metagenomics analysis of the rhizosphere of ornamental cultivars.\nMicrobiome present in Cayambe glaciar: Here, we explored the microbiome present in a tropical glacier.\nMicrobiome present in Sumaco stratovolcano: Here, we explored the microbiome present in a tropical sleeping volcano."
+  },
+  {
+    "objectID": "post/about.html#teaching-and-mentoring",
+    "href": "post/about.html#teaching-and-mentoring",
+    "title": "Daniel Quiroz",
+    "section": "Teaching and mentoring",
+    "text": "Teaching and mentoring\nBeyond my research, I’m deeply committed to the realms of teaching and mentoring. I’m currently serving as a teaching assistant for the DataViz in R, and I find great fulfillment in guiding for the second time. Additionally, I’m a mentor within the Metabolomics Group at Ikiam University, where I’m devoted to nurturing the next generation of scientists.\nIn essence, my journey is a fusion of scientific exploration, software innovation, and the joy of passing on knowledge. If you share my passion for metabolomics, genomics, or data science, let’s connect and embark on a journey of discovery together!"
+  },
+  {
+    "objectID": "post/about.html#recent-publications",
+    "href": "post/about.html#recent-publications",
+    "title": "Daniel Quiroz",
+    "section": "Recent Publications",
+    "text": "Recent Publications\n\n2024 - Jefferson V Pastuña-Fasso, Cristian Quiroz-Moreno, et al. Metabolite fingerprinting of Urospatha sagittifolia (Araceae) tubers at different growth stages by multi-platform metabolomics and molecular networking. Microchemical journal (link).\n2024 - C. Alfonso Molina, Cristian Quiroz-Moreno, et al.,Bacterial community assessment of drinking water and downstream distribution systems in highland localities of Ecuador . Journal of Water and Health (link).\n2023 - Magdalena Dias, Pablo Monfort-Lanzas, Cristian Quiroz-Moreno, et al., The microbiome of the ice-capped Cayambe Volcanic Complex in Ecuador. Frotiers in Microbioloy (link).\n2022 - Magdalena Dias, Cristian Quiroz-Moreno, et al., Soil bacterial community along an altitudinal gradient in the Sumaco, a stratovolcano in the Amazon region. Frontiers in Forest and Global Change (link).\n2022- Mallory L. Goggans, Emma A. Bilgrey, Cristian Quiroz-Moreno, et. al., Short-Term Tomato Consumption Alters the Pig Gut Microbiome toward a More Favorable Profile. Mirobiology Spectrum (link).\n2020 - Cristian Quiroz-Moreno, et. al., RGCxGC toolbox: an R-package for data processing in comprehensive two-dimensional gas chromatography-mass spectrometry. Microchemical Journal (link).\n2018 - Noroska Salazar, Cristian Quiroz-Moreno, et. al.,\nNew advances in toxicological forensic analysis using mass spectrometry techniques. Journal of Analytical Methods in Chemistry (link)."
   },
   {
     "objectID": "post/20230928_MSextract_batch/index.html",
