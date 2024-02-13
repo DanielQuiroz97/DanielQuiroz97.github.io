@@ -246,6 +246,17 @@
     ]
   },
   {
+    "objectID": "post/20230928_MS2extract_tips/index.html#concept-of-ms2extract",
+    "href": "post/20230928_MS2extract_tips/index.html#concept-of-ms2extract",
+    "title": "MS2extract Part 4 - Using MSconvert to filter useful MS/MS data",
+    "section": "Concept of MS2extract",
+    "text": "Concept of MS2extract\nBefore moving to the hands-on application, we would like to clarify some definitions about this software that could help improve the explanation of the following case examples.\nThe MS2extract concept can be summarized in two main subsequent tasks; (1) look for scans with a specific precursor ion m/z, and (2) extract the MS/MS fragmentation pattern.\nTherefore, your data file (.mzML) must contain at least one MS/MS scan with the specified precursor ion to extract the MS/MS data.",
+    "crumbs": [
+      "MS/MS libraries",
+      "4 - MS2extract extra tips"
+    ]
+  },
+  {
     "objectID": "post/20230928_MS2extract_tips/index.html#case-1-converting-to-.mzml-the-entire-run",
     "href": "post/20230928_MS2extract_tips/index.html#case-1-converting-to-.mzml-the-entire-run",
     "title": "MS2extract Part 4 - Using MSconvert to filter useful MS/MS data",

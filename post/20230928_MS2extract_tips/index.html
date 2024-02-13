@@ -238,12 +238,10 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#goal-of-this-document" id="toc-goal-of-this-document" class="nav-link active" data-scroll-target="#goal-of-this-document">Goal of this document</a></li>
-  <li><a href="#concept-of-ms2extract" id="toc-concept-of-ms2extract" class="nav-link" data-scroll-target="#concept-of-ms2extract">#Concept of MS2extract</a>
-  <ul class="collapse">
+  <li><a href="#concept-of-ms2extract" id="toc-concept-of-ms2extract" class="nav-link" data-scroll-target="#concept-of-ms2extract">Concept of MS2extract</a></li>
   <li><a href="#case-1-converting-to-.mzml-the-entire-run" id="toc-case-1-converting-to-.mzml-the-entire-run" class="nav-link" data-scroll-target="#case-1-converting-to-.mzml-the-entire-run">Case 1: Converting to .mzML the entire run</a></li>
   <li><a href="#case-2-trimming-for-specific-retention-time" id="toc-case-2-trimming-for-specific-retention-time" class="nav-link" data-scroll-target="#case-2-trimming-for-specific-retention-time">Case 2: Trimming for specific retention time</a></li>
   <li><a href="#case-3-multiple-ce-in-the-same-run" id="toc-case-3-multiple-ce-in-the-same-run" class="nav-link" data-scroll-target="#case-3-multiple-ce-in-the-same-run">Case 3: Multiple CE in the same run</a></li>
-  </ul></li>
   </ul>
 </nav>
     </div>
@@ -292,11 +290,12 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 <p>*Note:* this is the fourth vignette for this package and if you find some terms unclear, or are not familiar with the concepts, please visit the previous vignettes (<a href="https://cooperstonelab.github.io/MS2extract/articles/1_introduction.html">Package introduction</a>, <a href="https://cooperstonelab.github.io/MS2extract/articles/2_using_batch_extract.html">Batch mode introduction</a>, and <a href="https://cooperstonelab.github.io/MS2extract/articles/4_import_mzml_explanation.html">Importing MS/MS data</a>).</p>
 </section>
-<section id="concept-of-ms2extract" class="level1">
-<h1>#Concept of MS2extract</h1>
+<section id="concept-of-ms2extract" class="level2">
+<h2 class="anchored" data-anchor-id="concept-of-ms2extract">Concept of MS2extract</h2>
 <p>Before moving to the hands-on application, we would like to clarify some definitions about this software that could help improve the explanation of the following case examples.</p>
 <p>The <a href="https://github.com/CooperstoneLab/MS2extract">MS2extract</a> concept can be summarized in two main subsequent tasks; (1) look for scans with a specific precursor ion <em>m/z</em>, and (2) extract the MS/MS fragmentation pattern.</p>
 <p>Therefore, your data file (<em>.mzML</em>) must contain at least one MS/MS scan with the specified precursor ion to extract the MS/MS data.</p>
+</section>
 <section id="case-1-converting-to-.mzml-the-entire-run" class="level2">
 <h2 class="anchored" data-anchor-id="case-1-converting-to-.mzml-the-entire-run">Case 1: Converting to .mzML the entire run</h2>
 <p>In this case, although is not the optimal approach, it will get the job done, if your data meets a requirement.</p>
@@ -396,7 +395,6 @@ ul.task-list li input[type="checkbox"] {
 </blockquote>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
