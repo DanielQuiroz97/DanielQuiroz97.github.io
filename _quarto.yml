@@ -4,7 +4,7 @@ project:
 website:
 # Title and description
   title: "Daniel Quiroz"
-  site-url: https://danielquiroz97.github.io
+  site-url: https://danielquiroz97.github.io/
   repo-url: https://github.com/DanielQuiroz97/DanielQuirozWeb
   open-graph: true
   twitter-card:
