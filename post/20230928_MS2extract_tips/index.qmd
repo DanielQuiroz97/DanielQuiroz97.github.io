@@ -40,7 +40,7 @@ introduction](https://cooperstonelab.github.io/MS2extract/articles/2_using_batch
 and [Importing MS/MS
 data](https://cooperstonelab.github.io/MS2extract/articles/4_import_mzml_explanation.html)).
 
-# #Concept of MS2extract
+## Concept of MS2extract
 
 Before moving to the hands-on application, we would like to clarify some
 definitions about this software that could help improve the explanation

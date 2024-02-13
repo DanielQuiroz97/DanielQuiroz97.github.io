@@ -50,9 +50,14 @@ website:
             - href: post/20230925_msmint_apple/index.html
               text: "HRMS targeted peak deconvolution"
 
-#
+# Execution freeze for github actions
 execute:
   freeze: auto
+
+# footer
+  page-footer:
+    border: true
+    left: "Created [Quarto](https://quarto.org/) <br> © Cristian D Quiroz Moreno, 2024, License: [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/) <br>"
 
 # Format
 format:
