@@ -3,6 +3,7 @@ project:
 
 website:
 # Title and description
+  google-analytics: "G-59REMQZT33"
   title: "Daniel Quiroz"
   site-url: https://danielquiroz97.github.io/
   repo-url: https://github.com/DanielQuiroz97/DanielQuirozWeb
