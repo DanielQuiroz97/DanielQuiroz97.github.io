@@ -1,35 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://danielquiroz97.github.io/post/20230811_MS2extract4library/index.html</loc>
-    <lastmod>2024-02-20T03:20:49.248Z</lastmod>
-  </url>
-  <url>
-    <loc>https://danielquiroz97.github.io/post/20231016_MirrorPlot/index.html</loc>
-    <lastmod>2024-02-20T03:20:49.268Z</lastmod>
-  </url>
-  <url>
-    <loc>https://danielquiroz97.github.io/post/about.html</loc>
-    <lastmod>2024-02-20T03:20:49.272Z</lastmod>
-  </url>
-  <url>
-    <loc>https://danielquiroz97.github.io/post/20230928_MSextract_batch/index.html</loc>
-    <lastmod>2024-02-20T03:20:49.256Z</lastmod>
-  </url>
-  <url>
-    <loc>https://danielquiroz97.github.io/index.html</loc>
-    <lastmod>2024-02-20T03:20:49.244Z</lastmod>
+    <loc>https://danielquiroz97.github.io/post/20240601_ASMSMaterial/index.html</loc>
+    <lastmod>2024-06-02T18:08:59.274Z</lastmod>
   </url>
   <url>
     <loc>https://danielquiroz97.github.io/post/20230928_MS2extract_tips/index.html</loc>
-    <lastmod>2024-02-20T03:20:49.256Z</lastmod>
-  </url>
-  <url>
-    <loc>https://danielquiroz97.github.io/post/20230928_MS2extract_import/index.html</loc>
-    <lastmod>2024-02-20T03:20:49.256Z</lastmod>
+    <lastmod>2024-06-02T18:08:59.246Z</lastmod>
   </url>
   <url>
     <loc>https://danielquiroz97.github.io/post/20230925_msmint_apple/index.html</loc>
-    <lastmod>2024-02-20T03:20:49.248Z</lastmod>
+    <lastmod>2024-06-02T18:08:59.238Z</lastmod>
+  </url>
+  <url>
+    <loc>https://danielquiroz97.github.io/post/20230811_MS2extract4library/index.html</loc>
+    <lastmod>2024-06-02T18:08:59.234Z</lastmod>
+  </url>
+  <url>
+    <loc>https://danielquiroz97.github.io/index.html</loc>
+    <lastmod>2024-06-02T18:08:59.234Z</lastmod>
+  </url>
+  <url>
+    <loc>https://danielquiroz97.github.io/post/about.html</loc>
+    <lastmod>2024-06-02T18:08:59.310Z</lastmod>
+  </url>
+  <url>
+    <loc>https://danielquiroz97.github.io/post/20231016_MirrorPlot/index.html</loc>
+    <lastmod>2024-06-02T18:08:59.258Z</lastmod>
+  </url>
+  <url>
+    <loc>https://danielquiroz97.github.io/post/20230928_MSextract_batch/index.html</loc>
+    <lastmod>2024-06-02T18:08:59.246Z</lastmod>
+  </url>
+  <url>
+    <loc>https://danielquiroz97.github.io/post/20230928_MS2extract_import/index.html</loc>
+    <lastmod>2024-06-02T18:08:59.246Z</lastmod>
   </url>
 </urlset>
