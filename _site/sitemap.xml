@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://danielquiroz97.github.io/index.html</loc>
-    <lastmod>2024-02-12T22:38:57.326Z</lastmod>
+    <lastmod>2024-06-02T18:06:59.292Z</lastmod>
   </url>
   <url>
     <loc>https://danielquiroz97.github.io/post/20230928_MS2extract_import/index.html</loc>
@@ -31,5 +31,9 @@
   <url>
     <loc>https://danielquiroz97.github.io/post/20230928_MSextract_batch/index.html</loc>
     <lastmod>2024-02-12T22:38:57.251Z</lastmod>
+  </url>
+  <url>
+    <loc>https://danielquiroz97.github.io/post/20240601_ASMSMaterial/index.html</loc>
+    <lastmod>2024-06-02T18:03:09.901Z</lastmod>
   </url>
 </urlset>

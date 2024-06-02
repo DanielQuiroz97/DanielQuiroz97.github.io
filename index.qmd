@@ -16,6 +16,8 @@ More information about myself, please visit the [About](post/about.html) page.
 
 ## Latest blogs
 
+* ASMS 2024 Material - Useful links and oral presentation slides [(Link)](post/20240601_ASMSMaterial/) 
+
 * M2extract Part 1 - Introduction to MS2extract package [(Link)](/post/20230811_MS2extract4library/)
 
 * MS2extract Part 2 - Using the MS2extract batch pipeline [(Link)](post/20230928_MSextract_batch/)

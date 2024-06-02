@@ -1,0 +1,19 @@
+---
+title: ASMS 2024 Material
+author: Cristian Quiroz-Moreno
+date: '2023-08-11'
+---
+
+## ASMS Material
+
+### Useful links
+
+-   [MS2extract](https://github.com/CooperstoneLab/MS2extract): R package for creating high-resolution mass spectrometry libraries.
+-   [PhenolicsDB](https://cooperstonelab.github.io/PhenolicsDB/): High-resolution mass spectrometry library.
+-   [PhenolicsDB in GNPS2](https://external.gnps2.org/gnpslibrary): PhenolicsDB is available in GNPS2.
+
+### Presentatio slides
+
+[![](Slide.png)](slides.pdf)
+
+You can download the presentation slides here ([link](slides.pdf))

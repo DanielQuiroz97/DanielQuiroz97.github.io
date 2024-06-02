@@ -18,7 +18,7 @@
     "href": "index.html#latest-blogs",
     "title": "Omics-based Data Analysis",
     "section": "Latest blogs",
-    "text": "Latest blogs\n\nM2extract Part 1 - Introduction to MS2extract package (Link)\nMS2extract Part 2 - Using the MS2extract batch pipeline (Link)\nMS2extract Part 3 - Behind the curtains of importing MS/MS data (Link)\nMS2extract Part 4 - Using MSconvert to filter useful MS/MS data (Link)"
+    "text": "Latest blogs\n\nASMS 2024 Material - Useful links and oral presentation slides (Link)\nM2extract Part 1 - Introduction to MS2extract package (Link)\nMS2extract Part 2 - Using the MS2extract batch pipeline (Link)\nMS2extract Part 3 - Behind the curtains of importing MS/MS data (Link)\nMS2extract Part 4 - Using MSconvert to filter useful MS/MS data (Link)"
   },
   {
     "objectID": "index.html#latest-publications",
@@ -376,5 +376,19 @@
       "MS/MS libraries",
       "2 - MS2extract batch processing"
     ]
+  },
+  {
+    "objectID": "post/20240601_ASMSMaterial/index.html",
+    "href": "post/20240601_ASMSMaterial/index.html",
+    "title": "ASMS 2024 Material",
+    "section": "",
+    "text": "MS2extract: R package for creating high-resolution mass spectrometry libraries.\nPhenolicsDB: High-resolution mass spectrometry library.\nPhenolicsDB in GNPS2: PhenolicsDB is available in GNPS2.\n\n\n\n\n\nYou can download the presentation slides here (link)"
+  },
+  {
+    "objectID": "post/20240601_ASMSMaterial/index.html#asms-material",
+    "href": "post/20240601_ASMSMaterial/index.html#asms-material",
+    "title": "ASMS 2024 Material",
+    "section": "",
+    "text": "MS2extract: R package for creating high-resolution mass spectrometry libraries.\nPhenolicsDB: High-resolution mass spectrometry library.\nPhenolicsDB in GNPS2: PhenolicsDB is available in GNPS2.\n\n\n\n\n\nYou can download the presentation slides here (link)"
   }
 ]
